@@ -19,3 +19,40 @@ def bubblesort(vector): # Definimos Bubble Sort y vector es la lista de numeros 
                 vector[j], vector[j + 1] = vector[j + 1], vector[j] # El numero mayor se va moviendo hacia la derecha , por lo cual se van intercambiando
 ```
 
+# Merge Sort
+
+Ahora dirigimos nuestra atención a usar una estrategia de dividir y conquistar como una forma de mejorar el desempeño de los algoritmos de ordenamiento. El primer algoritmo que estudiaremos es el ordenamiento por mezcla. El ordenamiento por mezcla es un algoritmo recursivo que divide continuamente una lista por la mitad. Si la lista está vacía o tiene un solo ítem, se ordena por definición (el caso base). Si la lista tiene más de un ítem, dividimos la lista e invocamos recursivamente un ordenamiento por mezcla para ambas mitades. Una vez que las dos mitades están ordenadas, se realiza la operación fundamental, denominada mezcla. La mezcla es el proceso de tomar dos listas ordenadas más pequeñas y combinarlas en una sola lista nueva y ordenada.
+
+```python
+# Metodo Merge Sort
+
+def mergesort(vector): # Definimos Merge Sort y vector es la lista de numeros a comparar
+    if len(vector) > 1: # Si la lista tiene 1 elemento, ya esta ordenada
+        medio = len(vector) // 2 # Se divide la lista en dos partes
+        izq = vector[:medio] # Parte izquierda de la lista
+        der = vector[medio:] # Parte derecha de la lista
+
+        mergesort(izq) # Recursion en la parte izquierda
+        mergesort(der) # Recursion en la parte derecha
+
+        i = j = k = 0 # Contadores para izquierda, derecha y vector final
+
+        while i < len(izq) and j < len(der): # Mientras ambas listas tengan elementos
+            if izq[i] < der[j]: # Comparamos elementos
+                vector[k] = izq[i]
+                i += 1
+            else:
+                vector[k] = der[j]
+                j += 1
+            k += 1
+
+        while i < len(izq): # Copia los elementos restantes de la izquierda
+            vector[k] = izq[i]
+            i += 1
+            k += 1
+
+        while j < len(der): # Copia los elementos restantes de la derecha
+            vector[k] = der[j]
+            j += 1
+            k += 1
+```
